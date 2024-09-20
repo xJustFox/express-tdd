@@ -7,7 +7,7 @@ const  createSlug = (string) => {
         slug = string;
     }
 
-    return slug.toLocaleLowerCase();
+    return slug.toLocaleLowerCase().split(' ').join('-');
 }    
 
 module.exports = {

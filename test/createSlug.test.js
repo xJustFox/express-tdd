@@ -11,6 +11,11 @@ test('createSlug dovrebbe ritornare una stringa in lowercase', () => {
     expect(result).not.toMatch(/[A-Z]/);
 });
 // createSlug dovrebbe ritornare una stringa con gli spazi sostituiti da -
+test('createSlug dovrebbe ritornare una stringa con gli spazi sostituiti da -', () => {
+    const result = createSlug('test slug');
+    expect(result).not.toMatch(/\s/);
+    expect(result).toMatch(/-/);
+});
 // createSlug dovrebbe incrementare di 1 lo slug quando esiste già
 // createSlug dovrebbe lanciare un errore in caso di titolo non presente o formato errato
 // createSlug dovrebbe lanciare un errore se manca l'array dei post
