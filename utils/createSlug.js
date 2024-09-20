@@ -1,25 +1,26 @@
-const posts = [
-    {
-        title: 'test slug',
-        slug: 'test-slug'
+const createSlug = (obj, posts) => {
+    let { title } = obj;
+    
+    if (!title || !posts) {
+        throw new Error();
     }
-]
-
-const createSlug = (obj) => {
-    const { title } = obj;
-
-    if (typeof obj != 'object') {
-        throw new Error("Formato errato");
+    
+    if (typeof title !== 'string') {
+        title = title+"";
     }
 
     if (title.length < 1) {
-        throw new Error("Titolo non presente");
+        throw new Error();
     }
 
-    let baseSlug = `${title}`.toLocaleLowerCase().split(' ').join('-');
+    if (title.match(/[!£$%&/()=?^_:;*§éç°]/)) {
+        throw new Error();
+    }
+    
+    let baseSlug = title.toLocaleLowerCase().split(' ').join('-');
     let slug = baseSlug;
     let counter = 1;
-
+    
     while (posts.find(p => p.slug === slug)) {
         slug = `${baseSlug}-${counter}`;
         counter++;
