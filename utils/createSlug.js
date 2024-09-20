@@ -1,13 +1,16 @@
-const  createSlug = (string) => {
-    let slug = '';
+const slugs = ['test-slug']
 
-    if (typeof string !== 'string') {
-        slug = `${string}`;
-    } else {
-        slug = string;
+const  createSlug = (string) => {
+    let baseSlug = `${string}`.toLocaleLowerCase().split(' ').join('-');
+    let slug = baseSlug;
+    let counter = 1;
+    
+    while (slugs.find(s => s === slug)) {
+        slug = `${baseSlug}-${counter}`;
+        counter++;  
     }
 
-    return slug.toLocaleLowerCase().split(' ').join('-');
+    return slug;
 }    
 
 module.exports = {
